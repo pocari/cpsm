@@ -21,6 +21,8 @@ rm -rf build
 mkdir -p build
 {
     cd build
-    cmake -DPY3:BOOL=$PY3 ..
+    cmake -DPY3:BOOL=$PY3 \
+       -DPYTHON_LIBRARY=$(python3 -c "import sys; print(sys.prefix + '/lib/libpython3.5m.dylib')") \
+       -DPYTHON_INCLUDE_DIR=$(python3 -c "import sys; print(sys.prefix + '/include/python3.5m/')") ..
     make install
 }
